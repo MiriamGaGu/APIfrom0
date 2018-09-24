@@ -10,10 +10,13 @@ var controladorUsuarios = require("../Controladores/usuarios.controlador.js");
 //para nuestra API REST
 var api = express.Router();
 
+//middleware de autentificación
+var md_aut = require("../token/aut.js"); 
+
 //Crear la ruta con el metodo GET (nos permite hace lectura)
 //para pasar el metodo que va a tener que cargar la pagina cuando hagamos
 //la peticiòn HTTP de esa ruta
-api.get("/probando-controlador-usuarios", controladorUsuarios.pruebaUsuarios);
+api.get("/probando-controlador-usuarios", md_aut.autenticacion, controladorUsuarios.pruebaUsuarios);
 
 //Creams la ruta para crear usuarios y utilizamos el metodo POST
 api.post("/crear-usuarios", controladorUsuarios.crearUsuarios);
