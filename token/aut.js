@@ -1,7 +1,8 @@
 "use strict"
 
+//jwt-simple me permite generar los token
 var token = require("jwt-simple");
-var momento = require("moment");
+var momento = require("moment");//crea la fecha de exp y de creación
 var claveSecreta = "clave_secreta";//Tiene que coincidir con la que hicimos en le token 
 
 /*METODO DE AUTENTIFICACION*/
@@ -19,8 +20,7 @@ exports.autenticacion = function(req, res, next){
     }else{
 
         //Quitamos las comillas simples y dobles al toquen con el mètodo replace
-        
-        // var tokenEnviado = req.header.authorization.replace(/['"]+/g, '');
+        var tokenEnviado = req.headers.authorization.replace(/['"]+/g, '');
 
         // Sentencia de manejo de excepciones 
         //La sentencia try...catch marca un bloque de instrucciones a intentar que puedan causar 
@@ -47,7 +47,7 @@ exports.autenticacion = function(req, res, next){
 
             }
 
-            //Un bloque catch es usado para capturar tosas las excepciones que puedan ser generadas en el boque try.
+            //Un bloque catch es usado para capturar todas las excepciones que puedan ser generadas en el boque try.
 
         }catch(excepcion){
 

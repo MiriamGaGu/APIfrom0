@@ -97,11 +97,46 @@ function ingresoUsuario(req, res){
         }
     }
 
-
-
     })
+
 }
 
+//Método Actualizar Usuario
+function actualizarUsuario(req, res){
+
+    //Llamamos por parametros el id que se actualizará
+    var id = req.params.id;
+
+    //Tomamos los datos del formulario(postman)
+    var actualizar = req.body;
+
+    if(id != req.usuaioToken.sub){
+        return res.status(500).send({mensaje: "No tienes permiso para actualizar este usuario"})
+    }
+
+    // Recorremos a base de datos con el método findByIdAndUpdate
+
+    Usuarios.findByIdAndUpdate(id, actualizar, (error, usuarioActualizado) =>{
+        if(error){
+            res.status(500).send({mensaje: "Error al actualizar el usuario"})
+        }
+
+        else{
+
+            if(!usuarioActualizado){
+
+                res.status(404).send({mensaje: "No se ha podido actualizar el usuario"})
+
+            }else{
+
+                res.status(200).send({usuarioActualizado})
+            }
+        }
+
+    })
+
+
+}
 
 
 //Exportamos los metodos del modulo

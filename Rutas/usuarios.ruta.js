@@ -19,9 +19,16 @@ var md_aut = require("../token/aut.js");
 api.get("/probando-controlador-usuarios", md_aut.autenticacion, controladorUsuarios.pruebaUsuarios);
 
 //Creams la ruta para crear usuarios y utilizamos el metodo POST
+//en postman se agrega usuario, en el body con x-www-form-urlencoded
 api.post("/crear-usuarios", controladorUsuarios.crearUsuarios);
 
 //Creamos la ruta para el ingreso de usuario 
 api.post("/login", controladorUsuarios.ingresoUsuario);
+
+//METODO PUT
+//Sirve para poder actualizar información en la base de datos 
+
+api.put("/actualizar-usuario/:id", md_aut.autenticacion, controladorUsuarios.actualizarUsuario);
+
 //Exportamos el modulo api
 module.exports = api;
