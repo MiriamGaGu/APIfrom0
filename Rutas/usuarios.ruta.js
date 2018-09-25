@@ -27,8 +27,11 @@ api.post("/login", controladorUsuarios.ingresoUsuario);
 
 //METODO PUT
 //Sirve para poder actualizar información en la base de datos 
-
 api.put("/actualizar-usuario/:id", md_aut.autenticacion, controladorUsuarios.actualizarUsuario);
+
+//Metodo Delete
+//Creamos la ruta para borrar usuario y utilizamos el método DELETE
+api.delete("/borrar-usuario/:id", md_aut.autenticacion, controladorUsuarios.borrarUsuario)
 
 //Exportamos el modulo api
 module.exports = api;

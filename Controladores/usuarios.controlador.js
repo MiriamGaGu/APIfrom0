@@ -138,10 +138,43 @@ function actualizarUsuario(req, res){
 
 }
 
+//Método para borrar usuario
+function borrarUsuario(req, res){
+
+    var id = rew.params.id;
+
+    if(id != req.usuaioToken.sub){
+
+        return res.status(500).send({mensaje: "No tienes permiso para actualizar este usuario"})
+    }
+
+    //Recorremos la base de datos con el método findByIdAndRemove
+    Usuarios.findByIdAndRemove(id, (error, usuarioBorrado) => {
+
+        if(error){
+            
+            res.status(500).send({mensaje: "Error al borrar el usuario"})
+
+        }else{
+
+            if(!usuarioBorrado){
+
+                res.status(404).send({mensaje: "El susuario no se ha podido borrar"})
+            }else{
+
+                res.status(200).send({usuarioBorrado})
+            }
+        }
+    })
+
+}
+
 
 //Exportamos los metodos del modulo
 module.exports = {
     pruebaUsuarios,
     crearUsuarios,
-    ingresoUsuario
+    ingresoUsuario,
+    actualizarUsuario,
+    borrarUsuario
 }
