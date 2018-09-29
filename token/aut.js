@@ -13,7 +13,7 @@ var claveSecreta = "clave_secreta";//Tiene que coincidir con la que hicimos en l
 exports.autenticacion = function(req, res, next){
 
     //Pasamos el token por una cabecera de autenticaciòn 
-    if(req.header.authorization){
+    if(req.headers.authorization){
         
         return res.status(403).send({mensaje: "La peticion no tiene la cabecera de autenticacion"})
 
